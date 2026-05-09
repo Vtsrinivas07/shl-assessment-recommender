@@ -31,11 +31,11 @@ env/
 .env
 .env.local
 
-# Data Files
-data/
-*.csv
-*.pkl
-*.index
+# Data Files (allow pre-built data for deployment)
+# data/
+# *.csv
+# *.pkl
+# *.index
 
 # IDE
 .vscode/
