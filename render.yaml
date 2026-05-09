@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: shl-assessment-recommender
+    env: python
+    region: oregon
+    plan: free
+    branch: main
+    buildCommand: |
+      pip install -r requirements.txt
+      python -m app.scraper
+      python -m app.index_builder
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false
+      - key: MODEL_NAME
+        value: llama-3.3-70b-versatile
+      - key: TEMPERATURE
+        value: "0.1"
+      - key: RETRIEVAL_K
+        value: "20"
+      - key: PYTHON_VERSION
+        value: "3.11.0"
